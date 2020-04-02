@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<main>
+    <head>
+        <title>Lift Logger | Register</title>
+
+        <%- include head.ejs %>
+        <link rel="stylesheet" href="css/login.css">
+    </head>
+    <body>
+        <%- include header.ejs %>
+        
+        <!-- register page -->
+        <form action="/register" method="POST" enctype="text/plain">
+            <h2>
+                Register
+            </h2>
+            <h3>
+                a new account
+            </h3>
+            <h4>
+                or <a href="/login"><u>login</u></a> to your account
+            </h4>
+            <div class="inputs">
+                <label for="reg_uname">username: </label>
+                <input type="text" required="true" placeholder="username" name="username" id="reg_uname">
+                <% if(locals.regMessage) { %>
+                    <% if(regMessage == 'uname_taken' || regMessage == 'invalid_uname'){ %>
+                        <span class="message"><i class="fas fa-exclamation-circle"></i>
+                        <% if(regMessage == 'uname_taken'){ %>
+                            Username is taken
+                        <% } else if(regMessage == 'invalid_uname') { %>
+                            Invalid username
+                        <% } %>
+                    <% } %>
+                    </span>
+                <% } %>
+                <br>
+                
+                <label for="reg_uname">password: </label>
+                <input type="password" required="true" placeholder="password" name="password" id="reg_pswrd"><br>
+                
+                <label for="uname">email: </label>
+                <input type="email" required="true" placeholder="email" name="email" id="reg_email"><br>
+            </div>
+            <br>
+            <button type="submit">Register</button>
+            <div style="width: 80%; margin: 0 auto;">
+                <% if(locals.regMessage && regMessage == 'verify'){ %>
+                    <br>
+                    Thank you for registering.<br>
+                    Please check your inbox for a verification email.<br>
+                    (not really you can just log in)
+                <% } %>
+            </div>
+        </form>
+        <% if(locals.inputs) { %>
+            <p id="inputs" style="display: none;"><%= inputs %></p>
+        <% } %>
+        
+        <%- include footer.ejs %>
+    </body>
+    <script>
+        var inputs = document.getElementById("inputs").innerHTML.split("/");
+        document.getElementById("reg_uname").value = inputs[0];
+        document.getElementById("reg_pswrd").value = inputs[1];
+        document.getElementById("reg_email").value = inputs[2];
+    </script>
+</main>

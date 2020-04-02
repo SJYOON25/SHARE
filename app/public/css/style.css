@@ -1,0 +1,160 @@
+:root {
+    --theme-color: rgb(175, 200, 100);
+    --background-color: rgb(245, 245, 245);
+}
+
+body{
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    font-family: "Century Gothic";
+}
+
+h2{
+    margin: 10px 1vw;
+}
+
+h3{
+    margin: 10px 1vw;
+    font-weight: normal;
+}
+
+h4{
+    margin: 10px 1vw;
+    font-weight: normal;
+}
+
+a,
+button{
+    cursor: pointer;
+}
+
+.header{
+    width: auto;
+    height: 80px;
+    padding: 0 25px;
+    margin-bottom: 2vw;
+    background-color: var(--theme-color);
+    color: white;
+    z-index: 10;
+}
+
+.header h1{
+    font-size: 40px;
+    height: 40px;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.header h3{
+    margin: 0 0.5vw;
+    font-size: 25px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.header .navs{
+    height: 40px;
+    margin-top: 25px;
+    float: right;
+}
+
+.header a{
+    margin: 0 0.5vw;
+    padding: 3px 0.5vw;
+    padding-top: 0;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.header a,
+.header a:active,
+.header a:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.header a:hover{
+    box-shadow: -1px 0px 0px 0px white, 1px 0px 0px 0px white;
+}
+
+.inputs{
+    margin: auto;
+    text-align: right;
+    display: inline-block;
+}
+
+
+p{
+    line-height: 1.5;
+}
+
+p,
+form{
+    width: 40vw;
+    min-width: 600px;
+    margin: 2vw auto;
+    padding: 30px 10px;
+    padding-top: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+form input{
+    width: 60px;
+    height: 25px;
+    margin: 10px 0;
+    padding: 0 8px;
+}
+
+form input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+form input[type=number]::-webkit-inner-spin-button, 
+form input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+}
+
+form button{
+    background-color: var(--theme-color);
+    color: white;
+    width: auto;
+    height: 45px;
+    margin-top: 20px;
+    padding: 5px 2vw;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+form button:hover{
+    color: rgb(240, 240, 240);
+}
+
+a,
+a:visited{
+    color: black;
+}
+
+footer{
+    width: 30vw;
+    left: 35vw;
+    position: relative;
+    margin: 20vw 0 1vw 0;
+    color: gray;
+    text-align: center;
+    line-height: 1.75;
+}
+
+footer a:visited,
+footer a{
+    color: gray;
+}
+
+#loadOverlay{
+    display: none;
+}

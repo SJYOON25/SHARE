@@ -1,0 +1,9 @@
+.inputs{
+    margin: auto;
+}
+
+.message{
+    position: absolute;
+    margin: 10px;
+    padding: 2px;
+}

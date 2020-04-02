@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<div class="header">
+    <h1>
+        Lift Logger
+    </h1>
+    <% if(locals.user && user) { %>
+        <h3 id="uname_container">
+            <%=user%>
+        </h3>
+    <% } %>
+
+    <div class="navs">
+        <a href="/">
+            Home
+        </a>
+        <% if(locals.user && user) { %>
+            <a href="/friends">
+                Friends
+            </a>
+        <% } %>
+        <a href="/about">
+            About
+        </a>
+        <% if(locals.user && user) { %>
+            <a href="/logout">
+                Logout
+            </a>
+        <% } else { %>
+            <a href="/login">
+                Login / Register
+            </a>
+        <% } %>
+    </div>
+</div>

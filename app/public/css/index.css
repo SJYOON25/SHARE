@@ -1,0 +1,103 @@
+.cycle-pointer{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    padding: none;
+    margin: 0 0.5vw;
+    margin-top: 75px;
+    vertical-align: middle;
+    font-size: 25px;
+}
+
+.cycle-pointer:hover{
+    background-color: rgb(230, 230, 230);
+}
+
+.cycle-pointer:active{
+    background-color: rgb(220, 220, 220);
+}
+
+form{
+    min-height: 500px;
+}
+
+form input{
+    width: 20px;
+    font-family: "Century Gothic";
+}
+
+.page{
+    display: none;
+}
+
+.page .inputs{
+    min-height: 200px;
+}
+
+.page .weight-input{
+    width: 30px;
+}
+
+.panel-div{
+    display: none;
+    width: 40vw;
+    min-width: 600px;
+    margin: 20px auto;
+    padding: 10px 1vw 30px 1vw;
+    text-align: center;
+    background-color: white;
+}
+
+.tooltipButton{
+    cursor: pointer;
+}
+
+.tooltip{
+    display: none;
+    width: 175px;
+    height: auto;
+    padding: 10px;
+    z-index: 1;
+    position: absolute;
+    background-color: white;
+    border: 1px solid lightgray;
+    box-shadow: 5px 5px 5px var(--theme-color);
+}
+
+table{
+    width: 35vw;
+    min-width: 500px;
+    margin: 0 auto;
+    padding: 0;
+    border-collapse: collapse;
+}
+
+th,
+td{
+    height: 30px;
+    padding: 10px 8px;
+    text-align: left;
+}
+
+th{
+    padding-top: 0;
+    font-size: 18px;
+    border-bottom: 2px solid var(--theme-color);
+}
+
+td{
+    padding-bottom: 0;
+}
+
+canvas{
+    width: 30vw;
+    min-width: 500px;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+#load-overlay{
+    display: none;
+}

@@ -1,0 +1,6 @@
+- Make site secure HTTPS
+- Friends list
+- Logout functionality with page forward/back
+- Add password salting
+- Send confirmation emails
+- Add password modification + settings page

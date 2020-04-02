@@ -1,0 +1,19 @@
+{
+    "name": "lift-logger",
+    "version": "0.0.1",
+    "productName": "Lift Logger",
+    "description": "Weightlifting Logger and Analyzer",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/theRVR3ND/Lift-Logger"
+    },
+    "main": "main.js",
+    "license": "MIT",
+    "dependencies": {
+        "ejs": "^1.0.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.0",
+        "js-sha256": "^0.9.0",
+        "mysql": "^2.17.1"
+    }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<main>
+    <head>
+        <title>Lift Logger | About</title>
+
+        <%- include head.ejs %>
+        <link rel="stylesheet" href="css/about.css">
+    </head>
+    <body>
+        <%- include header.ejs %>
+
+        <div class="para">
+            <b style="font-size: 30px;">About</b><br>
+            <ul>
+                <li>
+                    <b>What is Lift Logger?</b><br>
+                    Lift Logger is a tool for tracking progress in weight training.
+                </li>
+                <li>
+                    <b>How do I use Lift Logger?</b><br>
+                    Simply enter your best recent lifts and click "Analyze" to display your strength estimates.
+                    To save and track your progress over time, create an account and "Log" your results.
+                </li>
+                <li>
+                    <b>How are 1 Rep Maximums calculated?</b><br>
+                    The <i>relative intensity,</i> or difficulty, of a set is determined by using a "rep max" chart.
+                    This correlates the percentage of a 1 rep max you can likely perform for a certain number of
+                    repetitions. Using this chart, we determine what your 1RM is assuming the lift you input was at
+                    maximal effort. Combining this with a modified chart for the number of sets performed, we can
+                    estimate your 1RM from the sets and reps performed at a certain weight.
+                </li>
+                <li>
+                    <b>How is my strength in calesthenic movements calculated?</b><br>
+                    We take into account your bodyweight when estimating your 1RM for pullups, chinups, and dips. This
+                    provides us the total weight you are lifting or moving. Then we can calculate your 1RM.
+                </li>
+                <li>
+                    <b>What happens if I don't input my bodyweight?</b><br>
+                    We only use your bodyweight for calculating your 1RM in pullups, chinups, and dips. If you don't
+                    provide this, we use an assumed bodyweight of 170 lbs, or 77 kgs. For the most accurate estimates
+                    in these movements, enter your bodyweight.
+                </li>
+                <li>
+                    <b>Why doesn't Lift Logger provide strength scores or relative strength analysis?</b><br>
+                    We believe that strength standards, scores, levels, and percentages are not beneficial for a
+                    long-term weight training progression. Most standards are skewed and are unduly influenced by the
+                    strength levels of those who use performance-enhancing substances. Displaying relative strengths is also
+                    harmful in our view - we believe that lifters should strive to improve their strength and endurance in
+                    all movements they perform, not just "weaker" ones.<br>
+                    Overall, our philosophy is that lifting is a personal endeavor, and your mental fortitude will benefit
+                    greatly if you focus on your own lifts instead of others.
+                </li>
+            </ul>
+            <div style="text-align: center;">
+                <b>Any more questions?</b> Send them to questions@liftlogger.com
+            </div>
+            <br>
+        </div>
+
+        <%- include footer.ejs %>
+    </body>
+</main>
