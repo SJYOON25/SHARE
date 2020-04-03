@@ -39,9 +39,8 @@ form input{
 }
 
 .panel-div{
-    display: none;
-    width: 40vw;
-    min-width: 600px;
+    width: 60vw;
+    min-width: 700px;
     margin: 20px auto;
     padding: 10px 1vw 30px 1vw;
     text-align: center;
@@ -65,22 +64,21 @@ form input{
 }
 
 table{
-    width: 35vw;
-    min-width: 500px;
-    margin: 0 auto;
-    padding: 0;
+    width: 95%;
+    margin: 2vh auto;
     border-collapse: collapse;
 }
 
 th,
 td{
-    height: 30px;
-    padding: 10px 8px;
+    height: 25px;
+    width: 12.5%;
+    padding: 2px 8px;
     text-align: left;
 }
 
 th{
-    padding-top: 0;
+    padding-bottom: 4px;
     font-size: 18px;
     border-bottom: 2px solid var(--theme-color);
 }
@@ -89,13 +87,10 @@ td{
     padding-bottom: 0;
 }
 
-canvas{
-    width: 30vw;
-    min-width: 500px;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    border: 1px solid lightgray;
+.time-label{
+    color: gray;
+    padding-right: 2px;
+    text-align: right;
 }
 
 #load-overlay{

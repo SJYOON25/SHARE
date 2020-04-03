@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <main>
     <head>
-        <title>Lift Logger | Login</title>
+        <title>SHARE | Login</title>
 
         <%- include head.ejs %>
         <link rel="stylesheet" href="css/login.css">
@@ -17,12 +17,14 @@
             <h3>
                 to your account
             </h3>
-            <h4>
-                or <a href="/register"><u>register</u></a> an account
-            </h4>
             <div class="inputs">
                 <label for="uname">username: </label>
-                <input type="text" required="true" placeholder="username" name="username" id="uname">
+                <% if(locals.unameVal) { %>
+                    <input type="text" required="true" placeholder="username" name="username" id="uname" value=<%=unameVal%>>
+                <% } else { %>
+                    <input type="text" required="true" placeholder="username" name="username" id="uname">
+                <% } %>
+
                 <% if(locals.loginMessage && loginMessage == "inv_uname") { %>
                     <span class="message"><i class="fas fa-exclamation-circle"></i>&nbsp;Invalid Username</span>
                 <% } %>

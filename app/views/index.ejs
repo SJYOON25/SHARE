@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <main>
     <head>
-        <title>Lift Logger | Home</title>
+        <title>SHARE | Home</title>
 
         <%- include head.ejs %>
         <link rel="stylesheet" href="css/index.css">
@@ -15,336 +15,87 @@
         <% } %>
 
         <!-- contents -->
-        <form action="/" method="POST" id="lifts-form">
-            <h1>
-                Log your lifts
-            </h1>
-            <h3>
-                <b>Units:</b>
-                <% if(locals.weightUnit && weightUnit == 1) { %>
-                    <a class="unit-option" onclick="unitSelector(LBS)">lbs</a>
-                    <a class="unit-option" onclick="unitSelector(KGS)" style="font-weight: bold;">kgs</a>
-                <% } else { %>
-                    <a class="unit-option" onclick="unitSelector(LBS)" style="font-weight: bold;">lbs</a>
-                    <a class="unit-option" onclick="unitSelector(KGS)">kgs</a>
-                <% } %>
-                <input type="hidden" name="unit" id="unit_selector" style="opacity: 0; width: 0; height: 0;">
-            </h3>
-            <h3>
-                <b>Bodyweight:</b>
-                <input id="bw_input" type="number" min="0" max="1000" name="bw" style="width: 40px;">
-                <% if(locals.bodyweight){ %>
-                    <div style="display: none;" id="bodyweight-val"><%=bodyweight%></div>
-                <% } %>
-                <span class="unit-display"></span>
-                <a class='tooltipButton' onclick='toggleTooltip(this, "bodyweight-tooltip")' onmouseover='triggerTooltip(this, "bodyweight-tooltip", 1)' onmouseleave='triggerTooltip(this, "bodyweight-tooltip", 0)'>
-                    <i class='fas fa-info-circle'></i>
-                </a>
-            </h3>
-            <br>
-            <a class="cycle-pointer" onclick="cyclePage(-1)" style="float: left;"><i class="fas fa-chevron-left" style="margin-right: 5px;"></i></a>
-            <a class="cycle-pointer" onclick="cyclePage(1)" style="float: right;"><i class="fas fa-chevron-right" style="margin-left: 5px;"></i></a>
-
-            <div id="pages-container">
-                <div class="page">
-                    <image src='images/press.png' width=180 height=180 style="float: top;"></image>
-                    <h2>
-                        Press
-                    </h2>
-                    <div class="inputs">
-                        <div>
-                            <b>Overhead Press:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <b>Incline Bench Press:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <b>Bench Press:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <a class='tooltipButton' onclick='toggleTooltip(this, "calesthenic-tooltip")' onmouseover='triggerTooltip(this, "calesthenic-tooltip", 1)' onmouseleave='triggerTooltip(this, "calesthenic-tooltip", 0)'>
-                                <i class='fas fa-info-circle'></i>
-                            </a>
-                            <b>Dip:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='-1000' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="page">
-                    <image src='images/pull.png' width=180 height=180 style="float: top;"></image>
-                    <h2>
-                        Pull
-                    </h2>
-                    <div class="inputs">
-                        <div>
-                            <a class='tooltipButton' onmouseover='triggerTooltip(this, "calesthenic-tooltip", 1)' onmouseleave='triggerTooltip(this, "calesthenic-tooltip", 0)'>
-                                <i class='fas fa-info-circle'></i>
-                            </a>
-                            <b>Pullup:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='-1000' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <a class='tooltipButton' onmouseover='triggerTooltip(this, "calesthenic-tooltip", 1)' onmouseleave='triggerTooltip(this, "calesthenic-tooltip", 0)'>
-                                <i class='fas fa-info-circle'></i>
-                            </a>
-                            <b>Chinup:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='-1000' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <b>Pendlay Row:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="page">
-                    <image src='images/squat.png' width=180 height=180></image>
-                    <h2>
-                        Squat
-                    </h2>
-                    <div class="inputs">
-                        <div>
-                            <b>Back Squat:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <b>Front Squat:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <b>Overhead Squat:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="page">
-                    <image src='images/hinge.png' width=180 height=180 style="float: top;"></image>
-                    <h2>
-                        Hinge
-                    </h2>
-                    <div class="inputs">
-                        <div>
-                            <b>Deadlift:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                        <div>
-                            <b>Power Clean:</b> <input type='number' min='1' max='6' name='ohp_s'> sets of
-                            <input type='number' min='1' max='10' name='ohp_r'> reps @
-                            <input class="weight-input" min='0' max='1000' type='number' name='ohp_w'>
-                            <span class="unit-display"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button onclick="analyze()" type="button" title="Analyze your lifts">Analyze</button>
-            <% if(locals.user) { %>
-                <button type="submit" title="Analyze your lifts and save them in your log">Analyze & Log</button>
-                <button onclick="fillForm()" type="button" title="Reset inputs to last logged values">Reset</button>
-            <% } %>
-        </form>
-
-        <div class="panel-div" id="analysis-div">
-            <h1>
-                Analysis
-            </h1>
-            <table id="analysis-table">
-                <thead>
-                    <tr>
-                        <th style="width: 50%; text-align: right;">
-                            Movement
-                        </th>
-                        <th>
-                            Estimated 1RM
-                            <a class='tooltipButton' onmouseover='triggerTooltip(this, "1RM-tooltip", 1)' onmouseleave='triggerTooltip(this, "1RM-tooltip", 0)'>
-                                <i class='fas fa-info-circle'></i>
-                            </a>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="analysis-cont"></tbody>
-            </table>
-            <div id="analysis-message-div">
-                Log a lift to analyze
-            </div>
-        </div>
-        
-        <div class="panel-div" id="progress-div">            
+        <div class="panel-div">
             <h1 style="margin-bottom: 0;">
-                Your Progress
+                Your Schedule
             </h1>
-            <h4 style="color: gray;">1 Rep Max Progress over Time</h4>
-            <h3 id="plot-title"></h3>
-            <canvas id="plot"></canvas>
-            <a class="cycle-pointer" onclick="cycleGraph(-1)" style="float: left;"><i class="fas fa-chevron-left" style="margin-right: 5px;"></i></a>
-            <a class="cycle-pointer" onclick="cycleGraph(1)" style="float: right;"><i class="fas fa-chevron-right" style="margin-left: 5px;"></i></a>
-            <!--
-                scrollbar for changing plot date range - do later
-            <div class="plotX-track">
-                <div class="plotX-bar" style="float: left;"></div>
-                <div class="plotX-bar" style="float: right;"></div>
-            </div>
-            -->
-        </div>
-
-        <div class="tooltip" id="bodyweight-tooltip">
-            <b>Bodyweight Input</b>
-            <hr>
-            This is used to calculate your strength in calesthenic movements.<br><b>It is never shared with anyone else.</b>
-            </div>
-        <div class="tooltip" id="calesthenic-tooltip">
-            <b>Calesthenics Weights</b>
-            <hr>
-            <span style="font-family: 'Courier New'">+</span> = weighted<br>
-            <span style="font-family: 'Courier New'">0</span> = using bodyweight<br>
-            <span style="font-family: 'Courier New'">-</span> = assisted
-        </div>
-        <div class="tooltip" id="1RM-tooltip">
-            <b>Estimated 1 Rep Max</b>
-            <hr>
-            This is the estimated highest weight you can lift for one repetition at 100% effort.
+            <h3>
+                for the next week
+            </h3>
+            <table id="calendar">
+                <tr>
+                    <th></th> <!-- time label column -->
+                    <th class="cal-header"></th>
+                    <th class="cal-header"></th>
+                    <th class="cal-header"></th>
+                    <th class="cal-header"></th>
+                    <th class="cal-header"></th>
+                    <th class="cal-header"></th>
+                    <th class="cal-header"></th>
+                </tr>
+            </table>
         </div>
         
         <%- include footer.ejs %>
     </body>
     <script>
-        // weight unit selection vars
-        const LBS = 0, KGS = 1;
+        var daysofweek = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 
-        const ratio = 0.45359237; // kg to lbs ratio
+        // fill calendar cells
+        var cal = document.getElementById("calendar");
 
-        const categories = ["Press", "Pull", "Squat", "Hinge"];
-        const lifts = [
-            "Overhead Press", "Incline Bench Press", "Bench Press", "Dip",
-            "Pullup", "Chinup", "Pendlay Row",
-            "Back Squat", "Front Squat", "Overhead Squat",
-            "Deadlift", "Power Clean"
-        ];
-
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-        // previously saved lift data (array of string, each index is one day's entry)
-        const liftData = document.getElementById("data-vals") == null ? null : document.getElementById("data-vals").innerHTML.split("|");
-        
-        const repMax = [1, 0.95, 0.925, 0.9, 0.875, 0.85, 0.8, 0.725]; // reps-1 or sets-1 = index, value = % of 1RM
-
-        // fill form
-        function fillForm(){
-            // set inputs values based on saved data
-            if(liftData !== null){
-                var values = liftData[liftData.length - 1].split("/"); // parse most recently entered lift data
-                var ind = 0;
-                var pages = document.getElementsByClassName("inputs");
-                for(var i = 0; i < pages.length; i++){
-                    var inputs = pages[i].getElementsByTagName("input");
-                    for(var j = 0; j < inputs.length; j++){
-                        inputs[j].value = values[ind++];
-                    }
-                }
-            }
-            var bwCont = document.getElementById("bodyweight-val");
-            if(bwCont !== null){
-                document.getElementById("bw_input").value = bwCont.innerHTML;
-            }
-        }
-        fillForm();
-
-        // return index of currently selected weight unit (LBS=0 or KGS=1)
-        function selectedUnit(){
-            var options = document.getElementsByClassName("unit-option");
-            var currSel = -1;
-            for(var i = 0; i < options.length; i++){
-                if(options[i].style.fontWeight == "bold"){
-                    currSel = i;
-                    break;
-                }
-            }
-            return currSel;
+        // days of week
+        var headers = document.getElementsByClassName("cal-header");
+        var today = new Date();
+        var day = today.getDay();
+        for(var d = 0; d < 7; d++){
+            headers[d].innerText = daysofweek[(day + d) % 7];
         }
 
-        // input unit selector
-        function unitSelector(selection){
-            var options = document.getElementsByClassName("unit-option");
-            var currSel = selectedUnit();
+        // hours of day
+        var sTime = 700, eTime = 1700; // calendar start/end times (24hr "time")
+        var timeDiv = 4; // how many time divisions per hour (4 = 15 min, 2 = 30 min, etc.)
+        for(var r = 0; r <= timeDiv * (eTime - sTime) / 100; r++){
+            var row = document.createElement("tr");
 
-            // cycle options
-            for(var i = 0; i < options.length; i++){
-                if(i == selection){
-                    options[i].style.fontWeight = "bold";
-                }else{
-                    options[i].style.fontWeight = "normal";
-                }
+            // time label
+            var tLabel = document.createElement("td");
+            if(r % 2 == 0){
+                var time = sTime + r * (100 / timeDiv);
+                tLabel.innerText = convertTime(time);
+                tLabel.setAttribute("class", "time-label");
             }
-            document.getElementById("unit_selector").value = (selection == 1);
+            row.appendChild(tLabel);
 
-            // change displayed unit abbreviation
-            var disp = document.getElementsByClassName("unit-display");
-            for(var i = 0; i < disp.length; i++){
-                disp[i].innerHTML = options[selection].innerHTML;
+            // days of week for this time
+            for(var c = 0; c < 7; c++){
+                var cell = document.createElement("td");
+                cell.setAttribute("id", "cal-" + r + "-" + c) // give each cell unique id for later access
+                row.appendChild(cell);
             }
+            cal.appendChild(row);
+        }
 
-            if(currSel != selection){
-                // convert bodyweight
-                var bwInput = document.getElementById("bw_input");
-                if(bwInput.value !== ""){
-                    if(selection == 0){
-                        bwInput.value = round_to_precision(parseInt(bwInput.value) / ratio, 1);
-                    }else{
-                        bwInput.value = round_to_precision(parseInt(bwInput.value) * ratio, 1);
-                    }
+        // convert raw integer time (24hr-ish) to string formatted
+        function convertTime(time){
+            // 12 hr clock format
+            if(true){
+                var period = "AM";
+                if(time >= 1200){
+                    time -= 1200;
+                    period = "PM";
                 }
-                
-                // convert lift weight values based on unit change
-                var inputs = document.getElementsByClassName("weight-input");
-                for(var i = 0; i < inputs.length; i++){
-                    if(inputs[i].value !== ""){
-                        if(selection == 0){
-                            inputs[i].value = round_to_precision(parseInt(inputs[i].value) / ratio, 1);
-                        }else{
-                            inputs[i].value = round_to_precision(parseInt(inputs[i].value) * ratio, 1);
-                        }
-                    }
-                }
-
-                // refresh analysis and progress views
-                analyze();
-                cycleGraph(0);
+                var h = time / 100;
+                var m = time % 100 > 100 ? time % 100 : "0" + (time % 100);
+                return (h == 0 ? 12 : h) + ":" + m + " " + period;
+            
+            // 24 hour time format
+            }else{
+                var h = time >= 1000 ? time / 100 : "0" + time / 100;
+                var m = time % 100 > 100 ? time % 100 : "0" + (time % 100);
+                return "" + h + m;
             }
         }
-        unitSelector(selectedUnit()); // update labels for weight inputs
-
-        // input page cycling
-        var visPage = 0; // index of the visible page
-        function cyclePage(step){
-            var pages = document.getElementsByClassName("page");
-            pages[visPage].style.display = "none" // hide previous page
-            visPage = (visPage + step + categories.length) % categories.length;
-            pages[visPage].style.display = "inline-block"; // show new page
-        }
-        cyclePage(0);
 
         // display or hide tooltip
         function triggerTooltip(button, id, visible){
@@ -375,250 +126,8 @@
             }
         }
 
-        // display/update analysis on logged lifts
-        function analyze(){
-            const div = document.getElementById("analysis-div")
-            div.style.display = "block";
-
-            const table = document.getElementById("analysis-cont");
-            table.innerHTML = "";
-
-            /* analysis (quick maths) */
-            // retrieve inputs
-            var inputs = document.getElementById("pages-container").getElementsByTagName("input");
-            var vals = new Array(inputs.length);
-            for(var i = 0; i < vals.length; i++){
-                vals[i] = inputs[i].value;
-            }
-
-            var unit = document.getElementsByClassName("unit-display")[0].innerHTML;
-            
-            var bodyweight = parseInt(document.getElementById("bw_input").value);
-            if(isNaN(bodyweight)){
-                bodyweight = selectedUnit() == 0 ? 170 : 77; // default bodyweight
-            }
-
-            // calculate 1RM of each lift
-            for(var i = 0; i < vals.length; i += 3){
-                // check that lift entries are valid
-                if(vals[i] !== "" && vals[i + 1] !== "" && vals[i + 2] !== ""){
-                    var sets = parseInt(vals[i]);
-                    var reps = parseInt(vals[i + 1]);
-                    var load = parseInt(vals[i + 2]); // a.k.a. the weight
-                    var oneRM;
-                    if(lifts[i / 3] == "Pullup" || lifts[i / 3] == "Chinup" || lifts[i / 3] == "Dip"){
-                        oneRM = calculate1RM(sets, reps, load, bodyweight);
-                    }else{
-                        oneRM = calculate1RM(sets, reps, load);
-                    }
-                    table.innerHTML += `
-                        <tr>
-                            <td style="text-align: right;">${lifts[i / 3]}</td>
-                            <td>${oneRM} ${unit}</td>
-                        </tr>
-                    `;
-                }
-            }
-            // display div/table
-            document.getElementById("analysis-table").style.display = table.innerInnerHTML !== "" ? "inline" : "none";
-            document.getElementById("analysis-message-div").style.display = table.innerInnerHTML !== "" ? "none" : "block";
-        }
-        if(liftData !== null){
-            analyze();
-        }
-
-        var graphInd = 0;
-        function cycleGraph(step){
-            graphInd = (graphInd + step + lifts.length) % lifts.length;
-            document.getElementById("plot-title").innerHTML = lifts[graphInd];
-            graph(); // update plot
-        }
-        cycleGraph(0);
-
-        // display plot of lift progress
-        function graph(){
-            if(liftData !== null && liftData.length > 1){
-                document.getElementById("progress-div").style.display = "block";
-
-                // dates corresponding with the data values (should be present iff data div exists)
-                const dates = document.getElementById("date-vals").innerHTML.split("|");
-                
-                var firstDay, lastDay = Date.parse(dates[dates.length - 1]); // date of first and last valid data entries, in milliseconds
-                
-                // convert data to int array
-                var data = new Array(liftData.length); // in chronological order
-                var numPoints = 0; // number of valid data points logged
-                for(var i = 0; i < data.length; i++){
-                    var split = liftData[i].split("/");
-                    // if valid data point
-                    if(split[graphInd * 3] !== ""){
-                        var sets = parseInt(split[graphInd * 3]);
-                        var reps = parseInt(split[graphInd * 3 + 1]);
-                        var load = parseInt(split[graphInd * 3 + 2]);
-
-                        // convert weight to current display unit
-                        if(selectedUnit() !== parseInt(split[split.length - 1], 10)){ // stored unit does not match current prefered unit
-                            load *= selectedUnit() == LBS ? 1 / ratio : ratio; // convert kilos to lbs
-                        }
-
-                        // calculate 1 rep max
-                        if(lifts[graphInd] == "Pullup" || lifts[graphInd] == "Chinup" || lifts[graphInd] == "Dip"){
-                            var bodyweight = parseInt(document.getElementById("bw_input").value);
-                            if(isNaN(bodyweight)){
-                                bodyweight = selectedUnit() == 0 ? 170 : 77; // default bodyweight
-                            }
-                            data[i] = calculate1RM(sets, reps, load, bodyweight);
-                        }else{
-                            data[i] = calculate1RM(sets, reps, load);
-                        }
-
-                        // track date range
-                        if(firstDay == undefined){
-                            firstDay = Date.parse(dates[i]);
-                        }
-                        numPoints++;
-                    
-                    // no valid data point
-                    }else{
-                        if(i > 0){
-                            data[i] = data[i - 1];
-                        }else{
-                            data[i] = null;
-                        }
-                    }
-                }
-
-                // rendering
-                var canvas = document.getElementById("plot");
-                canvas.width = 800;
-                canvas.height = Math.round(canvas.width * 9.0 / 16); // set aspect ratio
-
-                var ctx = canvas.getContext('2d');
-                ctx.strokeStyle = "#AFC864";
-                ctx.fillStyle = "#000000";
-                ctx.font = "normal 20px courier new";
-
-                // check if plot will be valid
-                if(numPoints < 2){
-                    ctx.font = "normal 28px century gothic";
-                    var message = `Log some ${numPoints == 0 ? "" : "more "}lifts to see your progress`;
-                    ctx.fillText(message, canvas.width / 2 - ctx.measureText(message).width / 2, canvas.height / 2 - 14);
-                    return;
-                }
-
-                // weight unit abbreviation for labeling graph
-                var unit = document.getElementsByClassName("unit-display")[0].innerHTML;
-
-                // make all data points positive (some might be < 0 if it's an calesthenic movement)
-                var shift = Math.min(...data) < 0 ? -Math.min(...data) + 50 : 0;
-                if((lifts[graphInd] == "Pullup" || lifts[graphInd] == "Chinup" || lifts[graphInd] == "Dip") && shift > 0){
-                    console.log(liftData);
-                    console.log(data);
-                    for(var i = 0; i < data.length; i++){
-                        if(data[i] !== null){
-                            data[i] += shift;
-                        }
-                    }
-                }
-
-                // plot points
-                var firstX, firstY, firstInd;
-                var prevX, prevY, prevInd;
-                var firstPoint = true;
-                ctx.beginPath();
-                for(var i = 0; i < data.length; i++){
-                    // draw data plot point
-                    if(data[i] !== null){
-                        // draw line segment
-                        var x = Math.round((canvas.width - 120.0) * (Date.parse(dates[i]) - firstDay) / (lastDay - firstDay)) + 8; // x-position representative of date of data
-                        var y = canvas.height - Math.round(canvas.height * 0.8 * data[i] / Math.max(...data)); // y-position (1RM weight) scaled 0 to 0.8 of canvas height
-                        ctx.lineTo(x, y);
-                        ctx.stroke();
-                        
-                        // draw label for point
-                        var nextX = Math.round((canvas.width - 120.0) * (Date.parse(dates[i + 1]) - firstDay) / (lastDay - firstDay));
-                        var nextY = canvas.height - Math.round(canvas.height * 0.8 * data[i + 1] / Math.max(...data));
-                        var s1 = (y - prevY) / (x - prevX); // slope from previous point
-                        var s2 = (nextY - y) / (nextX - x); // slope to next point
-                        if(firstPoint || Math.abs(Math.atan((s1 - s2) / (1 + s1 * s2))) > 0.75){ // check if text label should be drawn
-                            if(nextY <= y){ // draw below
-                                ctx.fillText(Math.round(data[i]) - shift, x + 4, y + 24);
-                            }else{ // draw above
-                                ctx.fillText(Math.round(data[i]) - shift, x + 4, y - 12);
-                            }
-                            highlightPoint(ctx, "#AFC864", x, y);
-
-                            if(firstPoint){
-                                firstX = x;
-                                firstY = y;
-                                firstInd = i;
-                            }
-                            firstPoint = false;
-                        }
-
-                        prevX = x;
-                        prevY = y;
-                        prevInd = i;
-                    }
-                }
-
-                // label the last point
-                ctx.fillText((Math.round(data[prevInd]) - shift) + " " + unit, x + 10, y + 8);
-                highlightPoint(ctx, "#AFC864", prevX, prevY);
-
-                // label dates for first and last points
-                ctx.strokeStyle = "#CCCCCC";
-                ctx.moveTo(firstX, firstY + 5, firstInd);
-                ctx.lineTo(firstX, canvas.height - 15);
-                ctx.stroke();
-                highlightPoint(ctx, "#CCCCCC", firstX, canvas.height - 15);
-                ctx.fillText(formatDate(new Date(dates[firstInd])), firstX + 10, canvas.height - 10);
-                
-                ctx.moveTo(prevX, prevY + 5, prevInd);
-                ctx.lineTo(prevX, canvas.height - 15);
-                ctx.stroke();
-                highlightPoint(ctx, "#CCCCCC", prevX, canvas.height - 15);
-                var formatted = formatDate(new Date(dates[prevInd]));
-                ctx.fillText(formatted, prevX - ctx.measureText(formatted).width - 10, canvas.height - 10);
-            }
-        }
-
-        function highlightPoint(ctx, colorHex, x, y){
-            // save old values
-            var oldFill = ctx.fillStyle;
-
-            ctx.beginPath();
-            ctx.arc(x, y, 5, 0, 2 * Math.PI, false); // draw circle centered around (x, y)
-            ctx.fillStyle = colorHex;
-            ctx.fill();
-            ctx.stroke();
-            
-            // restore old values
-            ctx.fillStyle = oldFill;
-            ctx.moveTo(x, y);
-        }
-
         function formatDate(date){
             return months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
-        }
-
-        function calculate1RM(sets, reps, load, bodyweight){
-            var oneRM; // estimated 1RM
-            if(bodyweight !== undefined){ // if calculating calesthenic weights
-                oneRM = (load + bodyweight) / ((1 - (1 - repMax[sets - 1]) / 10) * repMax[reps - 1]) - bodyweight;
-            }else{ // barbell movement (don't factor in bodyweight)
-                oneRM = load / ((1 - (1 - repMax[sets - 1]) / 15) * repMax[reps - 1]);
-            }
-            if(Math.abs(oneRM) > 10){
-                return round_to_precision(oneRM, 5);
-            }else{
-                return round_to_precision(oneRM, 0.5);
-            }
-        }
-
-        function round_to_precision(x, precision) {
-            var y = x + precision / 2;
-            return y - (y % precision);
         }
     </script>
 </main>

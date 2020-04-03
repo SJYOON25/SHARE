@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div class="header">
     <h1>
-        Lift Logger
+        SHARE
     </h1>
     <% if(locals.user && user) { %>
         <h3 id="uname_container">
@@ -14,20 +14,12 @@
             Home
         </a>
         <% if(locals.user && user) { %>
-            <a href="/friends">
-                Friends
-            </a>
-        <% } %>
-        <a href="/about">
-            About
-        </a>
-        <% if(locals.user && user) { %>
             <a href="/logout">
                 Logout
             </a>
         <% } else { %>
             <a href="/login">
-                Login / Register
+                Login
             </a>
         <% } %>
     </div>
