@@ -4,3 +4,4 @@
 
 - Revise CSS
 - Divest from FontAwesome
+- Add location to class info table

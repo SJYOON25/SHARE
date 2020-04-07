@@ -13,30 +13,45 @@ app.get('/', function(req, res) {
     // check if user is logged in
     if(req.session.user){
         // retrieve data
-        /*
-        var query = 'SELECT data, date FROM SHARE WHERE user=? ORDER BY date ASC';
-        db.query(query, [req.session.user], function (err, result) {
+        var query = 'SELECT * FROM roster WHERE user_id=?';
+        db.query(query, [req.session.user], function (err, result) { // figure out which classes user is enrolled in
             if(err){
                 console.error(err);
             }else{
+                console.log(query);
                 if(result.length > 0){
-                    var datas = "";
-                    var dates = "";
-                    for(var i = 0; i < result.length; i++){
-                        datas += result[i].data;
-                        dates += result[i].date;
-                        if(i < result.length - 1){
-                            datas += "|";
-                            dates += "|";
-                        }
+                    query = 'SELECT * FROM classes WHERE id=' + result[0].class_id; // retrieve class data for all enrolled courses
+                    for(var i = 1; i < result.length; i++){
+                        query += " OR id=" + result[i].class_id;
                     }
-                    res.render('index', {user: req.session.user});
-                }else{
+                    db.query(query, function (err, result) {
+                        if(err){
+                            console.error(err);
+                        }else{
+                            if(result.length > 0){ // concatenate data to pass on
+                                var classInfo = "";
+                                for(var i = 0; i < result.length; i++){
+                                    classInfo +=
+                                        result[i].name + "/" +
+                                        result[i].days + "/" +
+                                        result[i].start_time + "/" +
+                                        result[i].end_time + "/" +
+                                        result[i].instructor;
+                                    if(i < result.length - 1){
+                                        datas += "|";
+                                    }
+                                }
+                                res.render('index', {user: req.session.user, classInfo: classInfo});
+                            }else{
+                                res.render('index', {user: req.session.user}); // should never get here...
+                            }
+                        }
+                    });
+                }else{ // no enrolled classes
                     res.render('index', {user: req.session.user});
                 }
             }
         });
-        */
     }else{
         res.redirect('/login');
     }
@@ -123,7 +138,8 @@ app.post('/login', function(req, res) {
         var pswrd = lines[1].split('=')[1];
 
         // validate credentials
-        var query = 'SELECT hash FROM user_data WHERE username=?';
+        /*
+        var query = 'SELECT * FROM classes WHERE name="CS 2501"'; // CHANGE LATER!!!1!!11
         db.query(query, [uname], function (err, result) {
             if(err){
                 console.error(err);
@@ -144,6 +160,9 @@ app.post('/login', function(req, res) {
                 }
             }
         });
+        */
+        req.session.user = "kelvin";
+        res.redirect('/');
     });
 });
 

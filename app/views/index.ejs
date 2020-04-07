@@ -9,9 +9,8 @@
     <body>
         <%- include header.ejs %>
           
-        <% if(locals.datas) { %>
-            <div style="display: none;" id="data-vals"><%=datas%></div>
-            <div style="display: none;" id="date-vals"><%=dates%></div>
+        <% if(locals.classInfo) { %>
+            <div style="display: none;" id="class-info"><%=classInfo%></div>
         <% } %>
 
         <!-- contents -->
@@ -53,16 +52,16 @@
         }
 
         // hours of day
-        var sTime = 700, eTime = 1700; // calendar start/end times (24hr "time")
-        var timeDiv = 4; // how many time divisions per hour (4 = 15 min, 2 = 30 min, etc.)
-        for(var r = 0; r <= timeDiv * (eTime - sTime) / 100; r++){
+        var sTime = timeToMinutes(/*0700*/700), eTime = timeToMinutes(1700); // calendar start/end times    <--- Very Importante!
+        var timeDiv = 4; // how many time divisions per hour (4 = 15 min, 2 = 30 min, etc.)                 <--- Very Importante!
+        for(var r = 0; r <= timeDiv * Math.round((eTime - sTime) / 60); r++){
             var row = document.createElement("tr");
 
             // time label
             var tLabel = document.createElement("td");
-            if(r % 2 == 0){
-                var time = sTime + r * (100 / timeDiv);
-                tLabel.innerText = convertTime(time);
+            if(r % timeDiv == 0){
+                var time = sTime + (r / timeDiv) * 60; // in minutes since 12 am
+                tLabel.innerText = formatTime(minutesToTime(time));
                 tLabel.setAttribute("class", "time-label");
             }
             row.appendChild(tLabel);
@@ -76,8 +75,54 @@
             cal.appendChild(row);
         }
 
+        // fill in class/schedule blocks in calendar
+        function updateCalendar(){
+            var classInfoCont = document.getElementById("class-info");
+
+            if(classInfoCont == null)
+                return;
+
+            // parse info from string format
+            var classes = classInfoCont.innerHTML.split("|");
+            for(var i = 0; i < classes.length; i++){
+                var info = classes[i].split(" ");
+                var name = info[0],
+                    days = Integer.parseInt(info[1]), // shift register for days this class convenes
+                    start_time = timeToMinutes(Integer.parseInt(info[2])),
+                    end_time = timeToMinutes(Integer.parseInt(info[3])),
+                    instructor = info[4];
+                
+                // should round times here...
+                //start_time = 100 * Math.round(start_time / (100 / timeDiv));
+
+                var rStart = (start_time - sTime) / (60 / timeDiv);
+                var rEnd = (end_time - sTime) / (60 / timeDiv);
+                for(var shift = 0; shift < 7; shift++){ // shift to mask out for daysofweek byte, also, it's the day of the week
+                    if((days >> shift) & 1){
+                        for(var r = rStart; r <= rEnd; r++){
+                            var cell = document.getElementById("cal-" + r + "-" + ((shift + day) % 7));
+                            cell.style.backgroundColor = "purple";
+                            cell.style.color = "white";
+                            if(r == rStart) cell.innerText = name + "\n" + instructor; // only include class info in head cell
+                        }
+                    }
+                }
+            }
+        }
+        updateCalendar();
+
+        // convert # of minutes since 12 am to raw integer time (24hr-ish)
+        function minutesToTime(m){
+            return (m / 60) * 100 + (m % 60);
+        }
+
+        // convert raw integer time (24hr-ish) to # of minutes since 12 am
+        function timeToMinutes(t){
+            return (t / 100) * 60 + (t % 100);
+        }
+
         // convert raw integer time (24hr-ish) to string formatted
-        function convertTime(time){
+        function formatTime(time){
             // 12 hr clock format
             if(true){
                 var period = "AM";
